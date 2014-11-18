@@ -39,6 +39,12 @@ Haskellの入門講座から発展的な内容まで多くの講座を予定し�
 現在のところ定員は2名。
 マンツーマンに近い形で講義を受けることができる。
 
+ホームページ
+------------
+
+* [Haskell講座のページ(HTTP)](http://skami.iocikun.jp/haskell/lecture/)
+* [Haskell講座のページ(HTTPS)](https://skami.iocikun.jp/haskell/lecture/)
+
 連絡先
 ------
 
