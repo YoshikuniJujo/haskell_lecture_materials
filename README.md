@@ -42,4 +42,4 @@ Haskellの入門講座から発展的な内容まで多くの講座を予定し�
 連絡先
 ------
 
-[株式会社マーケット・イノベーション](http://www.marketinnovation.co.jp/info.html)
+お問い合わせ: [株式会社マーケット・イノベーション](http://www.marketinnovation.co.jp/info.html)
