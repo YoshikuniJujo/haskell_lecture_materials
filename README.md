@@ -42,10 +42,13 @@ Haskellの入門講座から発展的な内容まで多くの講座を予定し�
 ホームページ
 ------------
 
-* [Haskell講座のページ(HTTP)](http://skami.iocikun.jp/haskell/lecture/)
-* [Haskell講座のページ(HTTPS)](https://skami.iocikun.jp/haskell/lecture/)
+Haskell講座のページ
+[HTTP](http://skami.iocikun.jp/haskell/lecture/)
+[HTTPS](https://skami.iocikun.jp/haskell/lecture/)
 
-連絡先
-------
+お問い合わせ
+------------
 
-お問い合わせ: [株式会社マーケット・イノベーション](http://www.marketinnovation.co.jp/info.html)
+メールフォーム
+[HTTP](http://skami.iocikun.jp/mailToMe.html)
+[HTTPS](https://skami.iocikun.jp/mailToMe.html)
