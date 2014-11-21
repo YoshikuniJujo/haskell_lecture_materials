@@ -43,12 +43,12 @@ Haskellの入門講座から発展的な内容まで多くの講座を予定し�
 ------------
 
 Haskell講座のページ
-[HTTP](http://skami.iocikun.jp/haskell/lecture/)
-[HTTPS](https://skami.iocikun.jp/haskell/lecture/)
+([HTTP](http://skami.iocikun.jp/haskell/lecture/),
+[HTTPS](https://skami.iocikun.jp/haskell/lecture/))
 
 お問い合わせ
 ------------
 
 メールフォーム
-[HTTP](http://skami.iocikun.jp/mailToMe.html)
-[HTTPS](https://skami.iocikun.jp/mailToMe.html)
+([HTTP](http://skami.iocikun.jp/mailToMe.html),
+[HTTPS](https://skami.iocikun.jp/mailToMe.html))
