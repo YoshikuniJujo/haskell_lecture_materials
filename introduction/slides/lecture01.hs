@@ -28,9 +28,9 @@ meaning = [\t -> do
 	text t "* Haskellを書けるようにする", \t -> do
 	dvArrowShort t
 	text t "* 「明日からのXXプログラミングが変わる」", \t -> do
-	itext t 1 "XXはなじみの言語に置き換えてください", \t -> do
+	itext t 1 "XXには各自なじみの言語名を入れてください", \t -> do
 	text t "* Haskellという武器を手に入れる", \t -> do
-	itext t 1 "使えるところにはHaskellを使う" ]
+	arrowIText t 1 "「よし、ここにはHaskellを使おう」" ]
 
 meaning2 :: Page
 meaning2 = [\t -> do
@@ -43,7 +43,7 @@ meaning2 = [\t -> do
 	text t "* Haskellを使わなくても", \t -> do
 	itext t 1 "- プログラミングにおける良い習慣が身につく", \t -> do
 	text t "* 普及している言語を使える人は数多くいる", \t -> do
-	text t "* よって、それ「だけ」に精通したとしても", \t -> do
+	text t "* それ「だけ」に精通したとしても", \t -> do
 	arrowIText t 1 "コモディティ化してしまう恐れがある" ]
 
 meaning3 :: Page
@@ -57,23 +57,22 @@ meaning3 = [\t -> do
 	itext t 2 "と思われる、かもしれない", \t -> do
 	text t "* Tsuru Capital(www.tsurucapital.com)という実例", \t -> do
 	itext t 0.6 "「Haskellを社内の標準言語にすれば、"
-	itext t 1 "優秀な人材を集められる」" ]
+	itext t 3 "優秀な人材を集められる」" ]
 
 meaning4 :: Page
 meaning4 = [\t -> do
 	writeTopTitle t "僕はコモディティじゃない!"
 	text t "", \t -> do
 	text t "* 今持っている技術は10年後、20年後にも通用するだろうか?", \t -> do
-	text t "* 今持っている技術にHaskellをプラスすることで", \t -> do
-	itext t 1 "「取り換え不可能な人材」になれる", \t -> do
+	text t "* 今持っている技術にHaskellをプラスすることで"
+	itext t 3 "「取り換え不可能な人材」になれる", \t -> do
 	text t "* 会社や社会にとって「取り換え不可能」な人材になれば", \t -> do
 	itext t 1 "- 多少のわがままも言える", \t -> do
 	itext t 1 "- 「自分らしく」生きることができる" ]
 
 meaning5 :: Page
 meaning5 = [\t -> do
-	writeTopTitle t "明日の仕事、未来の自分"
-	text t "", \t -> do
+	writeTopTitle t "明日の仕事、未来の自分", \t -> do
 	text t "* 明日の仕事に役立つ", \t -> do
 	text t "* 未来の自分の武器になる", \t -> do
 	text t "* Haskellを学ぶということは", \t -> do
@@ -95,9 +94,9 @@ haskell = [\t -> do
 	text t "* Haskell Brooks Curry"
 	itext t 1 "(1900.9.12 - 1982.9.1)", \t -> do
 	text t "* コンビネータ論理の研究をした"
-	itext t 1 "数学者・論理学者", \t -> do
+	itext t 3 "数学者・論理学者", \t -> do
 	text t "* コンビネータ論理は関数型言語の"
-	itext t 1 "基盤となっている" ]
+	itext t 3 "基盤となっている" ]
 
 haskell2 :: Page
 haskell2 = [\t -> do
@@ -119,7 +118,7 @@ haskell3 = [\t -> do
 	text t "", \t -> do
 	text t "* 2003年 Haskell 98 の改定", \t -> do
 	itext t 1 "- Haskell 98 Language and Libraries:"
-	itext t 2 "The Revised Report", \t -> do
+	itext t 5 "The Revised Report", \t -> do
 	text t "* 2006年 Haskell' (Haskell Prime)", \t -> do
 	itext t 1 "- Haskell 98のマイナーバージョンアップ", \t -> do
 	text t "* 2010年 Haskell 2010", \t -> do
@@ -139,7 +138,7 @@ haskell4 = [\t -> do
 	text t "* 現在よく使われているのはGHC", \t -> do
 	text t "* GHCにはHaskell 2010にない拡張機能が含まれる", \t -> do
 	itext t 1 "- 明示的に宣言することで使えるようになる", \t -> do
-	itext t 1 "- 十分に吟味されたものは次の標準に取り込まれるかも", \t -> do
+	itext t 1 "- 十分に吟味されたものは標準に取り込まれるかも", \t -> do
 	text t "* この講義はGHCを使って進めていく" ]
 
 lecture :: Page
@@ -149,17 +148,19 @@ lecture = [\t -> do
 	text t "* 主に対話的環境を使う", \t -> do
 	text t "* 式を打ち込んでその結果を得る", \t -> do
 	text t "* 入出力を学んだらコンパイル実行について見る", \t -> do
-	text t "* GHCはコンパイルせずにインタプリタとして使うこともできる" ]
+	text t "* GHCはコンパイルせずにインタプリタとしても使える" ]
 
 attention :: Page
 attention = [\t -> do
 	writeTopTitle t "ターミナル"
 	text t "", \t -> do
 	text t "* この講義のなかではターミナルを主に利用する", \t -> do
+	itext t 1 "- ターミナルからエディタを呼び出す", \t -> do
+	itext t 1 "- ターミナルからghcの対話環境を呼び出す", \t -> do
 	text t "* HaskellのIDEもあるようだが", \t -> do
 	itext t 1 "- 演者が使ったことがない", \t -> do
 	itext t 1 "- ターミナルを使う方法のほうが応用が利く", \t -> do
-	itext t 1 "- つまり、後からIDEを使う方法を学ぶこともできる" ]
+	itext t 1 "- 後からIDEを使う方法を学ぶこともできる" ]
 
 summary :: Page
 summary = [\t -> do
