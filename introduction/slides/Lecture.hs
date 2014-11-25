@@ -40,7 +40,7 @@ title = "Haskell入門"
 author = "重城 良国"
 
 haskellBCurry :: (Double, Double, FilePath)
-haskellBCurry = (139.5, 171.5, "images/HaskellBCurry.jpg")
+haskellBCurry = (139.5, 171.5, "../images/HaskellBCurry.jpg")
 
 st, sp :: Bool
 st = unsafePerformIO $ read <$> readFile "show_turtle.txt"
