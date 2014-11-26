@@ -300,7 +300,7 @@ colon = [\t -> do
 	writeTopTitle t ":"
 	text t "", \t -> do
 	text t "* :の位置について学ぶ", \t -> do
-	text t "* 以下のように打ってみる", \t -> do
+	text t "* Shiftを押しながらasdfghjkl;のように打ってみる", \t -> do
 	itext t 1 "ASDFGHJKL:", \t -> do
 	text t "* :を打つには", \t -> do
 	itext t 1 "Shift + ホームポジションで右手小指", \t -> do
@@ -329,7 +329,7 @@ doubleQuote = [\t -> do
 	writeTopTitle t "\""
 	text t "", \t -> do
 	text t "* \"はダブルクォートと呼ばれる", \t -> do
-	text t "* 以下のように入力してみよう", \t -> do
+	text t "* Shiftを押しながらasdfghjkl;'のように入力する", \t -> do
 	itext t 1 "ASDFGHJKL:\"", \t -> do
 	text t "* \"を入力するには", \t -> do
 	itext t 1 "Shift + '", \t -> do
