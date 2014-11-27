@@ -3,7 +3,7 @@ module Main (main) where
 import Lecture
 
 subtitle :: String
-subtitle = "第3回 vimを使う"
+subtitle = "第3回 vimを学ぶ"
 
 main :: IO ()
 main = runLecture [
@@ -32,7 +32,7 @@ aboutVim = [ \t -> do
 	text t "* カーソルの移動等の編集作業に普通のキーを使う", \t -> do
 	text t "* マウスは使わない", \t -> do
 	arrowIText t 1 "いちいちキーボードから手を離す必要がない", \t -> do
-	text t "* 例えばカーソルの左上下右への移動はそれぞれhjkl", \t -> do
+	text t "* たとえば、カーソルの左上下右への移動はそれぞれhjkl", \t -> do
 	text t "* それじゃあ普通にアルファベットを入力するときは?", \t -> do
 	dvArrowShort t
 	itext t 1 "ノーマルモードからインサートモードへ移行する"
