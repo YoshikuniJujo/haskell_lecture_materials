@@ -61,7 +61,7 @@ basicMove = [ \t -> do
 	text t "", \t -> do
 	text t "* HHKBの練習のときに作ったファイルを開こう", \t -> do
 	itext t 1 "vim practice.txt", \t -> do
-	text t "* カーソルは多分一番左下にあると思う", \t -> do
+	text t "* カーソルは一番左下にあるはずだ", \t -> do
 	text t "* カーソルを左右に動かしてみよう", \t -> do
 	itext t 1 "左: h 右: l", \t -> do
 	text t "* 何度か'l'を押してカーソルを右端まで持っていこう", \t -> do
@@ -91,9 +91,9 @@ undoCmd = [ \t -> do
 	writeTopTitle t "もとに戻す"
 	text t "", \t -> do
 	text t "* まちがった編集をしてしまってもとに戻したいときには", \t -> do
-	itext t 1 "undo: 'u'", \t -> do
+	itext t 1 "undo: u", \t -> do
 	text t "* 'u'を押せば良い", \t -> do
-	text t "* \"Hello, world\"の'w'にカーソルを合わせよう", \t -> do
+	text t "* \"Hello, world!\"の'w'にカーソルを合わせよう", \t -> do
 	text t "* そこで'i'を押し何かを入力しよう", \t -> do
 	itext t 1 "例: miss", \t -> do
 	text t "* Escキーでノーマルモードにしてから'u'を押してみる", \t -> do
