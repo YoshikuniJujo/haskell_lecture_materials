@@ -134,7 +134,7 @@ xCmd = [ \t -> do
 	text t "", \t -> do
 	text t "* さて、さっきの入力ではwが2つ入力されていた", \t -> do
 	text t "* 'h'キーを使ってカーソルを'w'に合わせよう", \t -> do
-	text t "* ここで'x'キーですよ", \t -> do
+	text t "* そこで'x'キーですよ", \t -> do
 	text t "* \"wworld\"となっていたのが\"worldに\"修正された", \t -> do
 	text t "* 消したい文字があったらhjklでカーソルを合わせ'x'" ]
 
