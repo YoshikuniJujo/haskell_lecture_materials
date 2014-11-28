@@ -268,7 +268,7 @@ searchMove = [ \t -> do
 	writeTopTitle t "検索移動"
 	text t "", \t -> do
 	text t "* とりあえずggでファイルの先頭に移動しておこう", \t -> do
-	text t "* ここで'/you'と入力する", \t -> do
+	text t "* ここで'/you'と入力し、エンターキーを押す", \t -> do
 	arrowIText t 1 "カーソルが'you'の先頭の'y'に移動する", \t -> do
 	text t "* 今度は'n'を入力する", \t -> do
 	text t "* 'n'を入力するたびに「次の」youにカーソルが移動する", \t -> do
