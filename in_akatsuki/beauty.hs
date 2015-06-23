@@ -14,7 +14,9 @@ main = runLecture [
 	funcedure, funcedure2, funcedure3,
 	funcedureProblem, funcedureProblem2, funcedureProblem3,
 	funcedureProblem4,
-	whatsFunction2, fromProcedure, slime
+	whatsFunction2, fromProcedure, slime, transparency,
+	topic2, myIf, myIf2, myIf3, myIf4, myIf5, myIf6, myIf7,
+	lazy, lazyExam
 --	, meaning, meaning2, meaning3,
 --	meaning4, meaning5,
 --	haskell, haskell2, haskell3, haskell4,
@@ -315,7 +317,9 @@ fromProcedure = [ \t -> do
 	itext t 1 "- 同じ引数なら常に同じ値を返す", \t -> do
 	preLine t
 	arrowIText t 7 "参照透過性", \t -> do
-	text t "関数脳: 「名前をつけるほどのものでもない」"
+	text t "関数脳患者:", \t -> do
+	preLine t
+	itext t 2 "「名前をつけるほどのものでもない」"
 	]
 
 slime :: Page
@@ -333,8 +337,151 @@ slime = [ \t -> do
 
 transparency :: Page
 transparency = [ \t -> do
-	writeTopTitle t "参照透過性"
+	writeTopTitle t "ここまでのまとめ"
 	text t "", \t -> do
-	text t "* Haskellにおける手続きと切り分けられた関数", \t -> do
-	itext t 1 ""
+	writeNextTitle t "Haskellの特徴1: 参照透過性"
+	]
+
+topic2 :: Page
+topic2 = [ \t -> do
+	writeTopTitle t "次は何?"
+	text t "", \t -> do
+	text t "* 参照透過性について説明した", \t -> do
+	text t "* 手続き側から見ると「関数マイナス状態変化」", \t -> do
+	text t "* でも本当は関数のもともとの概念にもどしただけ", \t -> do
+	text t "* 次は参照透過性に関連する次の特徴の説明に移る", \t -> do
+	text t "* 参照透過性があるからこそこの特徴が生きる"
+	]
+
+myIf :: Page
+myIf = [ \t -> do
+	writeTopTitle t "myIf問題"
+	text t "", \t -> do
+	text t "* みなさんif文というものを知っていますか?", \t -> do
+	text t "* if文を使ったことのある人は手を挙げてください", \t -> do
+	text t "* ほぼ全員ですね", \t -> do
+	text t "* Haskellもこのくらい人気があれば良いのですが", \t -> do
+	text t "* それではif文と同じ働きをするmyIf関数を書いてください", \t -> do
+	text t "* if文を使ってもかまいません", \t -> do
+	itext t 1 "(お茶を飲みながら待つ、余裕を見せつけてやれ)", \t -> do
+	text t "* さてどうなったでしょう"
+	]
+
+myIf2 :: Page
+myIf2 = [ \t -> do
+	writeTopTitle t "myIf問題", \t -> do
+	text t "* Rubyだとこうかな", \t -> do
+	itext t 1 "def myIf(b, t, e)"
+	itext t 2 "if b then t else e end"
+	itext t 1 "end", \t -> do
+	text t "* 偶数だったら2で割り奇数だったらそのまま返す関数", \t -> do
+	text t "* if文を使うと", \t -> do
+	itext t 1 "def div2(n)", \t -> do
+	itext t 2 "if n.even? then n / 2 else n"
+	itext t 1 "end", \t -> do
+	text t "* myIf関数を使うと", \t -> do
+	itext t 1 "def myDiv2(n)"
+	itext t 2 "myIf(n.even?, n / 2, n)"
+	itext t 1 "end"
+	]
+
+myIf3 :: Page
+myIf3 = [ \t -> do
+	writeTopTitle t "myIf問題"
+	text t "", \t -> do
+	text t "* 試してみる", \t -> do
+	itext t 1 "puts div2(12)   => 6", \t -> do
+	itext t 1 "puts div2(7)    => 7", \t -> do
+	itext t 1 "puts myDiv2(12) => 6", \t -> do
+	itext t 1 "puts myDiv2(7)  => 7", \t -> do
+	text t "* 無問題(モウマンタイ)だ", \t -> do
+	text t "* 6はまだ2で割れるからもう1回割っときたい", \t -> do
+	itext t 1 "- div2(6)とすれば良い", \t -> do
+	arrowIText t 1 "自動化しよう"
+	]
+
+myIf4 :: Page
+myIf4 = [ \t -> do
+	writeTopTitle t "myIf問題"
+	text t "", \t -> do
+	text t "* 同じことをくりかえす場合「再帰」が使える", \t -> do
+	itext t 1 "- ちなみに「反復」は「再帰」の部分集合", \t -> do
+	text t "* 以下のようなdivdiv2を作る", \t -> do
+	itext t 1 "def divdiv2(n)"
+	itext t 2 "if n.even? then divdiv2(n / 2) else n end"
+	itext t 1 "end", \t -> do
+	text t "* divdiv2(n)はnを割れるだけ2で割った値を返す", \t -> do
+	itext t 1 "- nが偶数のときdivdiv2(n)はdivdiv2(n / 2)に等しい", \t -> do
+	itext t 1 "- nが奇数のときdivdiv2(n)はnに等しい", \t -> do
+	text t "* この内容がそのままコードになっている", \t -> do
+	itext t 1 "puts divdiv2(12) => 3"
+	]
+
+myIf5 :: Page
+myIf5 = [ \t -> do
+	writeTopTitle t "myIf問題"
+	text t "", \t -> do
+	text t "* 関数divdiv2もmyIfを使って書き直してみよう", \t -> do
+	itext t 1 "def myDivdiv2(n)"
+	itext t 2 "myIf(n.even?, myDivdiv2(n / 2), n)"
+	itext t 1 "end", \t -> do
+	text t "* やってることは関数divdiv2と同じこと(のはず)", \t -> do
+	text t "* 試してみよう", \t -> do
+	itext t 1 "puts myDivdiv2(12)", \t -> do
+	itext t 1 "stack level too deep (SystemStackError)", \t -> do
+	itext t 1 "「おわあ」", \t -> do
+	itext t 1 "「おぎやあ、おぎやあ、おぎやあ」"
+	itext t 1 "「おわああ、これを書いた人は病気です」", \t -> do
+	itext t 4 "(萩原朔太郎「猫」より)"
+	]
+
+myIf6 :: Page
+myIf6 = [ \t -> do
+	writeTopTitle t "myIf問題"
+	text t "", \t -> do
+	text t "* myIfの定義をもう一度見てみる", \t -> do
+	itext t 1 "def myIf(b, t, e)"
+	itext t 2 "if b then t else e end"
+	itext t 1 "end", \t -> do
+	text t "* デバッグ中に何度もつぶやく祈りのセリフ", \t -> do
+	text t "「神様!どう考えてもmyIfに問題があるなんて思えません」", \t -> do
+	text t "* ifとmyIfの違いはいくらコードを見ても見つかりはしない", \t -> do
+	text t "キバヤシ:"
+	itext t 1 "「if文には言語設計者による細工があるってことだ」", \t -> do
+	text t "他の4人 :「なっなんだってェーーーーー!!」"
+	]
+
+myIf7 :: Page
+myIf7 = [ \t -> do
+	writeTopTitle t "myIf問題"
+	text t "", \t -> do
+	text t "* 言語設計者がif文にしていた密かな細工", \t -> do
+	text t "* それが「遅延評価」だ", \t -> do
+	text t "* if文を関数として考えると3引数関数となる", \t -> do
+	text t "* すると以下のような性質があることがわかる", \t -> do
+	itext t 1 "- 第2引数は第1引数が真のときのみ必要", \t -> do
+	itext t 1 "- 第3引数は第1引数が偽のときのみ必要", \t -> do
+	itext t 1 "- 引数は必要とされるまで評価されない", \t -> do
+	text t "* if文以外のRubyの関数の引数は常に評価される", \t -> do
+	arrowIText t 1 "これを正格評価と呼ぶ"
+	]
+
+lazy :: Page
+lazy = [ \t -> do
+	writeTopTitle t "遅延評価"
+	text t "", \t -> do
+	text t "* 遅延評価を「正格評価」と対比し「非正格評価」とも呼ぶ", \t -> do
+	text t "* Haskellではすべての関数がデフォルトで遅延評価となる", \t -> do
+	text t "* つまりmyIf関数が書ける", \t -> do
+	text t "* if文は特別なものではなく単なる3引数関数と考えられる", \t -> do
+	arrowIText t 1 "統一感がある", \t -> do
+	arrowIText t 1 "美しい"
+	]
+
+lazyExam :: Page
+lazyExam = [ \t -> do
+	writeTopTitle t "遅延評価"
+	text t "", \t -> do
+	text t "* 美しさは実用性につながる", \t -> do
+	text t "(ここに遅延評価の良さげな例を載せる)"
 	]
