@@ -1,0 +1,340 @@
+import Lecture
+import System.Random
+import System.IO.Unsafe
+import Control.Monad
+
+subtitle :: String
+subtitle = "第0回 美しさ"
+
+main :: IO ()
+main = runLecture [
+	[flip writeTitle subtitle], myself, myself2, myself3, myself4,
+	beauty, language,
+	prelude, whatsFunction, procedure, procedure2,
+	funcedure, funcedure2, funcedure3,
+	funcedureProblem, funcedureProblem2, funcedureProblem3,
+	funcedureProblem4,
+	whatsFunction2, fromProcedure, slime
+--	, meaning, meaning2, meaning3,
+--	meaning4, meaning5,
+--	haskell, haskell2, haskell3, haskell4,
+--	lecture, attention, lecture2,
+--	lecture3, lecture4, lecture4_5, lecture4_7, lecture5, lecture6,
+--	summary
+ ]
+
+myself :: Page
+myself = [ \t -> do
+	writeTopTitle t "自己紹介"
+	text t "", \t -> do
+	text t "* Gentoo GNU/Linux歴: 13年", \t -> do
+	text t "* Gentooではすべてのパッケージをソースからビルドできる", \t -> do
+	text t "* パッケージ管理システムPortageは非常に優秀", \t -> do
+	text t "* インストールはCDブートしたGNU/Linux環境下で", \t -> do
+	itext t 3 "コマンドをぽちぽち入力していく", \t -> do
+	text t "* カーネルのビルドも自分でする", \t -> do
+	text t "* 自分で入れたものしか入っていないという満足感"
+	]
+
+myself2 :: Page
+myself2 = [ \t -> do
+	writeTopTitle t "自己紹介"
+	text t "", \t -> do
+	text t "* Haskell歴: 12年", \t -> do
+	text t "* 出会いは「Rubyソースコード完全解説」", \t -> do
+	itext t 0.7 "「HaskellやPL/Iで"
+	itext t 1 "書いてあるわけではないので一般人にも読める」", \t -> do
+	text t "* Haskellって?", \t -> do
+	arrowIText t 1 "「The Craft of Functional Programming」購入", \t -> do
+	arrowIText t 1 "「美しさ」の虜になる", \t -> do
+	text t "* それ以来Haskellでのコーディングを続ける", \t -> do
+	arrowIText t 1 "Hackageへのパッケージの登録数40以上"
+	text t "", \t -> do
+	text t "https://hackage.haskell.org/user/YoshikuniJujo"
+	]
+
+myself3 :: Page
+myself3 = [ \t -> do
+	writeTopTitle t "自己紹介"
+	text t "", \t -> do
+	text t "* エディタは?", \t -> do
+	text t "* 「Emacs? いいOSですね」", \t -> do
+	text t "* 「エディタは13年来Vimを使ってます」", \t -> do
+	text t "* vi系の指づかいは「熟練」が生きる", \t -> do
+	text t "* Firefoxにはvimperator拡張を入れる", \t -> do
+	text t "* マウス嫌い(もちろんタッチパッドも)", \t -> do
+	arrowIText t 1 "「マウスは生産性を落とす」", \t -> do
+	arrowIText t 1 "ウィンドウマネージャはxmonad", \t -> do
+	arrowIText t 1 "マウスに触れるのは1日数回"
+	]
+
+myself4 :: Page
+myself4 = [ \t -> do
+	writeTopTitle t "自己紹介"
+	text t "", \t -> do
+	text t "* zshいいよ", \t -> do
+	text t "* tmuxいいよ", \t -> do
+	text t "* rxvt-unicode, TUT-code, HHKB, KVM ...", \t -> do
+	text t "* ターミナルは黒字に白", \t -> do
+	arrowIText t 1 "ブルーライトとは無縁", \t -> do
+	text t "「僕の構築したデスクトップ環境最高!!!」"
+	text t "", \t -> do
+	arrowIText t 1 "指になじむ環境の構築", \t -> do
+	arrowIText t 1 "すべてをカスタマイズ", \t -> do
+	arrowIText t 1 "小さなことでもこだわるところにはこだわる", \t -> do
+	arrowIText t 1 "「僕」のためだけに進化し続ける環境"
+	]
+
+beauty :: Page
+beauty = [ \t -> do
+	writeTopTitle t "美しさとは"
+	text t "", \t -> do
+	text t "* 美しいものは効率的である", \t -> do
+	text t "* 漢字変換って「美しくない」", \t -> do
+	text t "* キーの組み合わせで漢字入力?", \t -> do
+	arrowIText t 1 "「美しい」", \t -> do
+	text t "* コンセプト的な美しさがある", \t -> do
+	text t "* kdで日、udで本、fnで語", \t -> do
+	text t "* 日本語は「kdudfn」で打てる", \t -> do
+	text t "* それが漢字直接入力", \t -> do
+	text t "* いくつかあるが僕の使っているのはTUT-code", \t -> do
+	text t "* 覚えていない漢字はしぶしぶ「漢字変換」"
+	]
+
+language :: Page
+language = [ \t -> do
+	writeTopTitle t "言語は美しくなければならない"
+	text t "", \t -> do
+	text t "* 実用性は客観的? 美しさは主観的?", \t -> do
+	arrowIText t 1 "違います", \t -> do
+	text t "* 僕に言わせれば", \t -> do
+	itext t 1 "「実用性は主観的、美しさは客観的」", \t -> do
+	text t "* ある程度メジャーな言語が実用的かどうかは", \t -> do
+	itext t 1 "- それが好きか嫌いかということ", \t -> do
+	itext t 1 "- 細かい分野間の違いにもよる", \t -> do
+	text t "* 「美しさ」の基準は明確", \t -> do
+	itext t 1 "- 統一感があるか", \t -> do
+	itext t 1 "- 本質をつかんでいるか", \t -> do
+	itext t 1 "- 回りくどくない直接的な表現ができるか"
+	]
+
+prelude :: Page
+prelude = [ \t -> do
+	writeTopTitle t "Haskell万歳"
+	text t "", \t -> do
+	text t "* Haskell万歳な世界に入る用意はできましたか?", \t -> do
+	text t "* 比較対象としてRubyとCを使いますが", \t -> do
+	itext t 4 "disるわけではありません", \t -> do
+	text t "* 僕がHaskellの次によく知っている言語がRubyとC", \t -> do
+	text t "* RubyもCもそれぞれに美しさがある", \t -> do
+	text t "* とくにRubyは非常に美しい", \t -> do
+	text t "* 今回は当て馬にしますが本当はわりと好きな言語"
+	]
+
+whatsFunction :: Page
+whatsFunction = [ \t -> do
+	writeTopTitle t "手続きと関数"
+	text t "", \t -> do
+	text t "* 「関数とは何ですか?」", \t -> do
+	text t "高校生: 「変数Xと変数Yの関係を表す式です」", \t -> do
+	text t "数学者: 「集合のある要素を別の要素に結びつけるものだ」", \t -> do
+	text t "プログラマ: 「手続きをまとめたものだ」", \t -> do
+	text t "高数生、数学者: 「え?」", \t -> do
+	text t "* プログラマだけ「関数」で別のものを指している"
+	itext t 2 "", \t -> do
+	itext t 2 "__人人人人人人___"
+	isemititle t 2 "> なぜ?!!!  <"
+	itext t 2 "~~~Y^Y^Y^Y^Y^Y~~~"
+	]
+
+procedure :: Page
+procedure = [ \t -> do
+	writeTopTitle t "手続き"
+	text t "", \t -> do
+	text t "村外れの老人: ", \t -> do
+	itext t 0 "「チューリングという者がおった」", \t -> do
+	itext t 0 "「彼はいつも無限の長さのリボンを探していたよ」", \t -> do
+	itext t 0 "「リボンに数字を書き込んだりリボンを移動させたり」", \t -> do
+	itext t 0 "「そのようなことをいつも夢想していたようじゃった」", \t -> do
+	itext t 0 "「ノイマンという男はそのリボンをメモリと呼んでおった」", \t -> do
+	text t "(映像とぎれる)"
+	]
+
+procedure2 :: Page
+procedure2 = [ \t -> do
+	writeTopTitle t "手続き"
+	text t "", \t -> do
+	text t "* 手続きとは", \t -> do
+	itext t 1 "値を変化させたり入力したり出力したりすること", \t -> do
+	text t "* チューリングマシンからアセンブラまで", \t -> do
+	itext t 3 "出てくる式は純粋な手続きである", \t -> do
+	itext t 1 "- もどり番地をスタックにセットせよ", \t -> do
+	itext t 1 "- アドレスXXに制御を移せ", \t -> do
+	itext t 1 "- (アドレスXXの一連の仕事)", \t -> do
+	itext t 1 "- スタックで指定された番地にもどれ"
+	]
+
+funcedure :: Page
+funcedure = [ \t -> do
+	writeTopTitle t "関続き"
+	text t "", \t -> do
+	text t "* C言語ではもどる前にレジスタに値をセットする", \t -> do
+	text t "* これを「返り値」と呼ぶ", \t -> do
+	text t "* こんな手続きは?", \t -> do
+	itext t 1 "- スタックに、もどり番地と数xを積む", \t -> do
+	itext t 1 "- 数xを2倍したものをレジスタにセットする", \t -> do
+	itext t 1 "- スタックで指定されたもどり番地にもどる", \t -> do
+	text t "* 引数がxで返り値が2 * xとなる", \t -> do
+	itext t 1 "f(x) = 2 * x", \t -> do
+	text t "* 手続きだけど「関数」のようにも見える", \t -> do
+	text t "* 関数みたいな手続きなので「関続き」とでも呼ぶ", \t -> do
+	arrowIText t 2 "そんな言葉はない!!!"
+	]
+
+funcedure2 :: Page
+funcedure2 = [ \t -> do
+	writeTopTitle t "関続き"
+	text t "", \t -> do
+	text t "* C言語では返せる値はレジスタにおさまる整数値のみ", \t -> do
+	text t "* Rubyでは返り値として何でも指定できる", \t -> do
+	arrowIText t 1 "C言語でよりもRubyでのほうが関数らしさアップ", \t -> do
+	text t "* 手続きが関数になろうとしている", \t -> do
+	text t "* ソートすることを考えてみよう", \t -> do
+	text t "* 与えられた配列自体を並べ変える", \t -> do
+	arrowIText t 1 "手続きとしてのソート", \t -> do
+	text t "* ソートされた新たな配列を返す", \t -> do
+	arrowIText t 1 "関数としてのソート"
+	]
+
+funcedure3 :: Page
+funcedure3 = [ \t -> do
+	writeTopTitle t "関続き"
+	text t "", \t -> do
+	text t "* すべての仕事について選択肢の2重化がある", \t -> do
+	itext t 1 "- 仕事の結果を返り値として返す", \t -> do
+	itext t 1 "- 仕事の結果を外部の変数に保存する", \t -> do
+	arrowIText t 1 "本質的な醜さがある", \t -> do
+	text t "* Haskellでは", \t -> do
+	itext t 1 "- 関数は関数であり", \t -> do
+	itext t 1 "- 手続きは手続きである", \t -> do
+	itext t 1 "- 2つはきちんと切り分けられている", \t -> do
+	arrowIText t 1 "美しい"
+	]
+
+funcedureProblem :: Page
+funcedureProblem = [ \t -> do
+	writeTopTitle t "現実的問題"
+	text t "", \t -> do
+	text t "* 醜さは現実的に問題となることがある", \t -> do
+	text t "* 以下のC言語の式を見てみよう", \t -> do
+	itext t 1 "int x = 0;", \t -> do
+	itext t 1 "printf(\"%d\\n\", ++x + ++x + ++x);", \t -> do
+	text t "* ++xは以下のような仕事をする", \t -> do
+	itext t 1 "- 変数xに1足した値を変数xに代入し", \t -> do
+	itext t 1 "- 新しい値を返り値として返す", \t -> do
+	text t "* これは典型的な「関続き」だ", \t -> do
+	text t "* printfで表示される数は何になると思いますか?"
+	]
+
+funcedureProblem2 :: Page
+funcedureProblem2 = [ \t -> do
+	writeTopTitle t "現実的問題"
+	text t "", \t -> do
+	text t "* 僕がGCC(v4.7.3)でコンパイルした結果はなんと", \t -> do
+	itext t 2 "(ここでためる)", \t -> do
+	arrowIText t 1 "7", \t -> do
+	preLine t
+	itext t 2 "(ここで聴衆がどよめく)", \t -> do
+	text t "* どよめいてください", \t -> do
+	text t "* xははじめ0", \t -> do
+	itext t 1 "- はじめの++xでxは1になり1を返す", \t -> do
+	itext t 1 "- 次の++xでxは2になり2を返す", \t -> do
+	itext t 1 "- さらに次の++xでxは3になり3を返す", \t -> do
+	text t "* それぞれの(++x)を足すと答えは6のはずだ", \t -> do
+	text t "* 「GCCのバグを見つけたバグレポートだ!!」", \t -> do
+	arrowIText t 1 "お待ちなさい", \t -> do
+	preLine t
+	itext t 4 "(ダンディな感じで)"
+	]
+
+funcedureProblem3 :: Page
+funcedureProblem3 = [ \t -> do
+	writeTopTitle t "現実的問題"
+	text t "", \t -> do
+	text t "* それはバグではない", \t -> do
+	preLine t
+	itext t 4 "(しつこく、ダンディな感じで)", \t -> do
+	text t "* C言語では式のなかでの評価順に決まりはない", \t -> do
+	itext t 1 "- はじめの++xと2番目の++xを同時に実行したっていい", \t -> do
+	text t "* GCCはまずはじめの2つの(++x)をまとめて計算する", \t -> do
+	text t "* すると2 + 2となり4となる、このときxは2", \t -> do
+	text t "* 次に3番目の(++x)を計算する、これは3となる", \t -> do
+	text t "* よって++x + ++x + ++xは7となる"
+	]
+
+funcedureProblem4 :: Page
+funcedureProblem4 = [ \t -> do
+	writeTopTitle t "現実的問題"
+	text t "", \t -> do
+	text t "* Rubyでも同じ問題は生じる", \t -> do
+	text t "* 評価順によって結果が変化してしまう", \t -> do
+	text t "* トリビアルな問題?", \t -> do
+	preLine t
+	itext t 3.5 "ではない", \t -> do
+	text t "* 本質的に違う2つのもの「関数」と「手続き」の混同"
+	]
+
+whatsFunction2 :: Page
+whatsFunction2 = [ \t -> do
+	writeTopTitle t "関数とは"
+	text t "", \t -> do
+	text t "* 「関数とは何ですか?」", \t -> do
+	text t "Haskellプログラマ: 「値を別の値に変換するものだ」", \t -> do
+	text t "高校生、数学者: 「そうとも言う」"
+	text t "", \t -> do
+	text t "* 手続き脳で考えると", \t -> do
+	itext t 1 "「Haskellは値の変化を認めないかたくるしい奴だ」", \t -> do
+	text t "* 関数脳で考えると", \t -> do
+	itext t 1 "「彼らをお許しください、"
+	itext t 2 "関数と手続きの違いをわかっていないのです」"
+	]
+
+fromProcedure :: Page
+fromProcedure = [ \t -> do
+	writeTopTitle t "参照透過性"
+	text t "", \t -> do
+	text t "* 「手続き」側から見るとHaskellの関数は", \t -> do
+	arrowIText t 1 "状態が使えない機能制限版の「関数」", \t -> do
+	text t "* Haskellをやりすぎて関数脳になると", \t -> do
+	arrowIText t 1 "彼らの言うところの「関数」は似非関数だ", \t -> do
+	text t "* 歩みよります", \t -> do
+	text t "* 手続き側から考えるとHaskellの関数の特徴は", \t -> do
+	itext t 1 "- 状態を変化させない", \t -> do
+	itext t 1 "- 状態の変化に影響されない", \t -> do
+	text t "* 関数の動作を変化させるのは「引数」だけ", \t -> do
+	itext t 1 "- 同じ引数なら常に同じ値を返す", \t -> do
+	preLine t
+	arrowIText t 7 "参照透過性", \t -> do
+	text t "関数脳: 「名前をつけるほどのものでもない」"
+	]
+
+slime :: Page
+slime = [ \t -> do
+	writeTopTitle t "状態変化"
+	text t "", \t -> do
+	text t "* 関数が状態を変化させることを副作用と呼ぶ", \t -> do
+	text t "* 副作用のある、副作用に左右される関数を使っていると", \t -> do
+	text t "* 金槌で釘を打とうとした瞬間に", \t -> do
+	itext t 1 "- 金槌がのこぎりになったり", \t -> do
+	itext t 1 "- 釘が親指になったりする", \t -> do
+	text t "* ときには便利だが", \t -> do
+	itext t 1 "いざというときに大変なことになる"
+	]
+
+transparency :: Page
+transparency = [ \t -> do
+	writeTopTitle t "参照透過性"
+	text t "", \t -> do
+	text t "* Haskellにおける手続きと切り分けられた関数", \t -> do
+	itext t 1 ""
+	]
