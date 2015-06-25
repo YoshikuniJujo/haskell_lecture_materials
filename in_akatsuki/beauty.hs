@@ -14,7 +14,7 @@ main = runLecture [
 	funcedure, funcedure2, funcedure3,
 	funcedureProblem, funcedureProblem2, funcedureProblem3,
 	funcedureProblem4,
-	whatsFunction2, fromProcedure, slime, transparency,
+	whatsFunction2, fromProcedure, slime, pureFunction, transparency,
 	topic2, myIf, myIf2, myIf3, myIf4, myIf5, myIf6, myIf7,
 	lazy, lazyExam
 --	, meaning, meaning2, meaning3,
@@ -93,7 +93,8 @@ beauty = [ \t -> do
 	text t "", \t -> do
 	text t "* 美しいものは効率的である", \t -> do
 	text t "* 漢字変換って「美しくない」", \t -> do
-	text t "* キーの組み合わせで漢字入力?", \t -> do
+	text t "* 何か他の方法はないか?", \t -> do
+	text t "* キーの組み合わせで漢字入力", \t -> do
 	arrowIText t 1 "「美しい」", \t -> do
 	text t "* コンセプト的な美しさがある", \t -> do
 	text t "* kdで日、udで本、fnで語", \t -> do
@@ -252,20 +253,13 @@ funcedureProblem2 = [ \t -> do
 	itext t 1 "- はじめの++xでxは1になり1を返す", \t -> do
 	itext t 1 "- 次の++xでxは2になり2を返す", \t -> do
 	itext t 1 "- さらに次の++xでxは3になり3を返す", \t -> do
-	text t "* それぞれの(++x)を足すと答えは6のはずだ", \t -> do
-	text t "* 「GCCのバグを見つけたバグレポートだ!!」", \t -> do
-	arrowIText t 1 "お待ちなさい", \t -> do
-	preLine t
-	itext t 4 "(ダンディな感じで)"
+	text t "* それぞれの(++x)を足すと答えは6のはずだ"
 	]
 
 funcedureProblem3 :: Page
 funcedureProblem3 = [ \t -> do
 	writeTopTitle t "現実的問題"
 	text t "", \t -> do
-	text t "* それはバグではない", \t -> do
-	preLine t
-	itext t 4 "(しつこく、ダンディな感じで)", \t -> do
 	text t "* C言語では式のなかでの評価順に決まりはない", \t -> do
 	itext t 1 "- はじめの++xと2番目の++xを同時に実行したっていい", \t -> do
 	text t "* GCCはまずはじめの2つの(++x)をまとめて計算する", \t -> do
@@ -298,7 +292,8 @@ whatsFunction2 = [ \t -> do
 	itext t 1 "「Haskellは値の変化を認めないかたくるしい奴だ」", \t -> do
 	text t "* 関数脳で考えると", \t -> do
 	itext t 1 "「彼らをお許しください、"
-	itext t 2 "関数と手続きの違いをわかっていないのです」"
+	itext t 2 "関数と手続きの違いをわかっていないのです」", \t -> do
+	itext t 1 "(「ルカによる福音書第23章34節」より)"
 	]
 
 fromProcedure :: Page
@@ -333,6 +328,18 @@ slime = [ \t -> do
 	itext t 1 "- 釘が親指になったりする", \t -> do
 	text t "* ときには便利だが", \t -> do
 	itext t 1 "いざというときに大変なことになる"
+	]
+
+pureFunction :: Page
+pureFunction = [ \t -> do
+	writeTopTitle t "置き換え"
+	text t "", \t -> do
+	text t "* 関数が副作用を持たないことを「純粋」と呼ぶ", \t -> do
+	text t "* 関数が純粋であれば", \t -> do
+	itext t 1 "- 関数定義はほぼ「置き換え」と等しくなる", \t -> do
+	text t "* 「置き換え」によって同じ処理になることを確認すれば", \t -> do
+	itext t 1 "- 2つの処理が同じ処理を行っていることは明らかに", \t -> do
+	text t "* 目視によるデバッグがある程度可能となる"
 	]
 
 transparency :: Page
