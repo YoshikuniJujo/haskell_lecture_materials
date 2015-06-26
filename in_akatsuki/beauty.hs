@@ -22,16 +22,12 @@ main = runLecture [
 	staticTyping,
 	features2,
 
-	functionArray,
+	functionArray, functionArray2, functionArray3,
+	functionAsArgument, firstclass,
+	features3,
 
-	lazyEveluation, myIf, myIf2, myIf3, myIf4, myIf5, myIf6, myIf7,
+	myIf, myIf2, myIf3, myIf4, myIf5, myIf6, myIf7,
 	lazy, lazyExam
---	, meaning, meaning2, meaning3,
---	meaning4, meaning5,
---	haskell, haskell2, haskell3, haskell4,
---	lecture, attention, lecture2,
---	lecture3, lecture4, lecture4_5, lecture4_7, lecture5, lecture6,
---	summary
  ]
 
 myself :: Page
@@ -439,6 +435,7 @@ dynamicTyping4 = [ \t -> do
 	arrowIText t 1 "何が与えられるかは予測できない", \t -> do
 	text t "* Rubyの関数の持つ「無限の拡張性」は", \t -> do
 	itext t 1 "- 絶対失敗しない関数を書くことを不可能にする"
+	itext t 2 "(値をそのまま返す関数等以外では)"
 	]
 
 staticTyping :: Page
@@ -468,15 +465,75 @@ functionArray = [ \t -> do
 	text t "", \t -> do
 	text t "* 引数として数値を取り数値を返す関数の配列を作り", \t -> do
 	itext t 1 "- すべての関数を値5に適用した配列を作りたい", \t -> do
-	text t ""
+	text t "* まずは以下のような関数があるとする", \t -> do
+	text t "def mul2(x) x * 2 end"
+	text t "def div2(x) x / 2 end"
+	text t "def square(x) x * x end"
 	]
 
-lazyEveluation :: Page
-lazyEveluation = [ \t -> do
-	writeTopTitle t "遅延評価"
+functionArray2 :: Page
+functionArray2 = [ \t -> do
+	writeTopTitle t "関数の配列"
 	text t "", \t -> do
-	text t "* 参照透過性に関連する特徴の説明", \t -> do
-	text t "* 参照透過性があるからこそこの特徴が生きる"
+	text t "fa = [", \t -> do
+	itext t 1 "lambda { |x| mul2(x) },"
+	itext t 1 "lambda { |x| div2(x) },"
+	itext t 1 "lambda { |x| square(x) } ]"
+	text t "ns = fa.map { |f| f.call(5) }"
+	text t "puts ns"
+	]
+
+functionArray3 :: Page
+functionArray3 = [ \t -> do
+	writeTopTitle t "関数の配列"
+	text t "", \t -> do
+	text t "* 以下のようにはできない", \t -> do
+	itext t 1 "fa = [mul2, div2, square]", \t -> do
+	text t "* Rubyでは「関数」は値ではない", \t -> do
+	text t "* ブロックのProcクラスのオブジェクトへの変換で値になる", \t -> do
+	text t "* Haskellでは関数は普通に「値」である", \t -> do
+	text t "* 以下は息をするのと同じくらい自然なことだ", \t -> do
+	itext t 1 "- 関数を変数に代入", \t -> do
+	itext t 1 "- 関数をデータ構造に格納", \t -> do
+	itext t 1 "- 関数を関数の引数とする", \t -> do
+	itext t 1 "- 関数を関数の返り値とする"
+	]
+
+functionAsArgument :: Page
+functionAsArgument = [ \t -> do
+	writeTopTitle t "関数の引数として関数を渡す"
+	text t "", \t -> do
+	text t "* 「関数の引数として関数を渡す」ことは機能限定版として"
+	itext t 1 "Rubyにも用意されている", \t -> do
+	text t "* それがRubyのブロックである", \t -> do
+	itext t 1 "arr.each { |x| ... }", \t -> do
+	text t "* Rubyのブロックを使うと自分で新たな「構文」が作れる", \t -> do
+	text t "* Haskellではごく普通の関数で同じことができる", \t -> do
+	text t "* さらに「複数の」関数を引数として取ることができる"
+	]
+
+firstclass :: Page
+firstclass = [ \t -> do
+	writeTopTitle t "第一級関数"
+	text t "", \t -> do
+	text t "* 第一級オブジェクトという言葉がある", \t -> do
+	text t "* だいたい以下を満たす", \t -> do
+	itext t 1 "- リテラルとして表現可能", \t -> do
+	itext t 1 "- 変数に代入できる", \t -> do
+	itext t 1 "- データ構造に格納できる", \t -> do
+	itext t 1 "- 関数の引数となる", \t -> do
+	itext t 1 "- 関数の返り値となる", \t -> do
+	text t "* Haskellにおいて関数は第一級オブジェクトである", \t -> do
+	text t "* それを指して第一級関数と呼ぶ"
+	]
+
+features3 :: Page
+features3 = [ \t -> do
+	writeTopTitle t "Haskellの特徴"
+	text t "", \t -> do
+	writeNextTitle t "特徴1: 参照透過性", \t -> do
+	writeNextTitle t "特徴2: 静的型付け", \t -> do
+	writeNextTitle t "特徴3: 第一級関数"
 	]
 
 myIf :: Page
@@ -496,13 +553,13 @@ myIf = [ \t -> do
 myIf2 :: Page
 myIf2 = [ \t -> do
 	writeTopTitle t "myIf問題", \t -> do
-	text t "* Rubyだとこうかな", \t -> do
+	text t "* こんな感じ", \t -> do
 	itext t 1 "def myIf(b, t, e)"
 	itext t 2 "if b then t else e end"
 	itext t 1 "end", \t -> do
 	text t "* 偶数だったら2で割り奇数だったらそのまま返す関数", \t -> do
 	text t "* if文を使うと", \t -> do
-	itext t 1 "def div2(n)", \t -> do
+	itext t 1 "def div2(n)"
 	itext t 2 "if n.even? then n / 2 else n"
 	itext t 1 "end", \t -> do
 	text t "* myIf関数を使うと", \t -> do
@@ -612,11 +669,11 @@ lazyExam = [ \t -> do
 	text t "def pickOdd(a, b)"
 	itext t 1 "if a.even? then b else a end"
 	text t "end"
-	text t "def div2(n)"
+	text t "def pDivdiv2(n)"
 	itext t 1 "pickOdd(n, div2(n))"
 	text t "end", \t -> do
 	text t "* pickOddはaが偶数ならばbを選びそうでなければaを返す", \t -> do
-	text t "* div2は関数pickOddを使った奇数になるまで2で割る関数", \t -> do
-	text t "* pickOddは2の倍数かどうかで処理を分ける構文と考えられる", \t -> do
-	text t "* 遅延評価によって単なる関数としてこのような処理が書ける"
+	text t "* pDivdiv2は奇数になるまで2で割る関数", \t -> do
+	text t "* pickOddは偶数かどうかで処理を分ける構文と考えられる", \t -> do
+	text t "* 遅延評価だと単なる関数としてこのような処理が書ける"
 	]
