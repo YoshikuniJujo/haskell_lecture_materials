@@ -10,12 +10,21 @@ main :: IO ()
 main = runLecture [
 	[flip writeTitle subtitle], myself, myself2, myself3, myself4,
 	beauty, language,
+
 	prelude, whatsFunction, procedure, procedure2,
-	funcedure, funcedure2, funcedure3,
+	funcedure, funcedure2, funcedure3, funcedure4,
 	funcedureProblem, funcedureProblem2, funcedureProblem3,
 	funcedureProblem4,
 	whatsFunction2, fromProcedure, slime, pureFunction, transparency,
-	topic2, myIf, myIf2, myIf3, myIf4, myIf5, myIf6, myIf7,
+	features1,
+
+	dynamicTyping, dynamicTyping2, dynamicTyping3, dynamicTyping4,
+	staticTyping,
+	features2,
+
+	functionArray,
+
+	lazyEveluation, myIf, myIf2, myIf3, myIf4, myIf5, myIf6, myIf7,
 	lazy, lazyExam
 --	, meaning, meaning2, meaning3,
 --	meaning4, meaning5,
@@ -213,10 +222,19 @@ funcedure3 :: Page
 funcedure3 = [ \t -> do
 	writeTopTitle t "関続き"
 	text t "", \t -> do
-	text t "* すべての仕事について選択肢の2重化がある", \t -> do
+	text t "* すべての仕事で値の返しかたに選択肢の2重化がある", \t -> do
 	itext t 1 "- 仕事の結果を返り値として返す", \t -> do
 	itext t 1 "- 仕事の結果を外部の変数に保存する", \t -> do
-	arrowIText t 1 "本質的な醜さがある", \t -> do
+	text t "* 値の渡しかたにも選択肢の2重化がある", \t -> do
+	itext t 1 "- 値を引数として渡す", \t -> do
+	itext t 1 "- 外部の変数として渡す", \t -> do
+	arrowIText t 1 "本質的な醜さがある"
+	]
+
+funcedure4 :: Page
+funcedure4 = [ \t -> do
+	writeTopTitle t "純粋な関数"
+	text t "", \t -> do
 	text t "* Haskellでは", \t -> do
 	itext t 1 "- 関数は関数であり", \t -> do
 	itext t 1 "- 手続きは手続きである", \t -> do
@@ -344,19 +362,120 @@ pureFunction = [ \t -> do
 
 transparency :: Page
 transparency = [ \t -> do
-	writeTopTitle t "ここまでのまとめ"
-	text t "", \t -> do
-	writeNextTitle t "Haskellの特徴1: 参照透過性"
-	]
-
-topic2 :: Page
-topic2 = [ \t -> do
-	writeTopTitle t "次は何?"
+	writeTopTitle t "参照透過性"
 	text t "", \t -> do
 	text t "* 参照透過性について説明した", \t -> do
 	text t "* 手続き側から見ると「関数マイナス状態変化」", \t -> do
-	text t "* でも本当は関数のもともとの概念にもどしただけ", \t -> do
-	text t "* 次は参照透過性に関連する次の特徴の説明に移る", \t -> do
+	text t "* でも本当は関数のもともとの概念にもどしただけ"
+	]
+
+features1 :: Page
+features1 = [ \t -> do
+	writeTopTitle t "Haskellの特徴"
+	text t "", \t -> do
+	writeNextTitle t "特徴1: 参照透過性"
+	]
+
+dynamicTyping :: Page
+dynamicTyping = [ \t -> do
+	writeTopTitle t "動的型付け"
+	text t "", \t -> do
+	text t "* Rubyで値の逆数を計算する関数を書いてください", \t -> do
+	text t "* こんな感じになるでしょうか", \t -> do
+	text t "def recip(x)"
+	itext t 1 "1 / x"
+	text t "end", \t -> do
+	text t "* 数については逆数の意味は明らかだ", \t -> do
+	text t "* 文字列では逆数を逆順の文字列と考える", \t -> do
+	text t "* 文字列についても正しく動作させたい"
+	]
+
+dynamicTyping2 :: Page
+dynamicTyping2 = [ \t -> do
+	writeTopTitle t "動的型付け"
+	text t "", \t -> do
+	text t "def recip(x)"
+	itext t 1 "case x"
+	itext t 2 "when Numeric"
+	itext t 3 "1 / x"
+	itext t 2 "when String"
+	itext t 3 "x.reverse"
+	itext t 1 "end"
+	text t "end", \t -> do
+	text t "* ブール値については逆は", \t -> do
+	itext t 1 "- trueに対してfalse", \t -> do
+	itext t 1 "- falseに対してtrueで良さそうだ"
+	]
+
+dynamicTyping3 :: Page
+dynamicTyping3 = [ \t -> do
+	writeTopTitle t "動的型付け"
+	text t "", \t -> do
+	text t "def recip(x)"
+	itext t 1 "case x"
+	itext t 1 "when Numeric"
+	itext t 2 "1 / x"
+	itext t 1 "when String"
+	itext t 2 "x.reverse"
+	itext t 1 "when TrueClass"
+	itext t 2 "not x"
+	itext t 1 "when FalseClass"
+	itext t 2 "not x"
+	itext t 1 "end"
+	text t "end"
+	]
+
+dynamicTyping4 :: Page
+dynamicTyping4 = [ \t -> do
+	writeTopTitle t "動的型付け"
+	text t "", \t -> do
+	text t "* Rubyは動的型付けなので新たな型への対応も簡単だ", \t -> do
+	text t "* 関数ではなくクラスメソッドとすれば", \t -> do
+	itext t 1 "- when節の内容を別ファイルにすることもできる", \t -> do
+	text t "* ここで完全なrecip関数を書きたいとする", \t -> do
+	text t "* 「失敗」することのないrecip関数は書けるか", \t -> do
+	arrowIText t 1 "不可能", \t -> do
+	text t "* 引数の型が決まっていない", \t -> do
+	arrowIText t 1 "何が与えられるかは予測できない", \t -> do
+	text t "* Rubyの関数の持つ「無限の拡張性」は", \t -> do
+	itext t 1 "- 絶対失敗しない関数を書くことを不可能にする"
+	]
+
+staticTyping :: Page
+staticTyping = [ \t -> do
+	writeTopTitle t "静的型付け"
+	text t "", \t -> do
+	text t "* Haskellでは静的型付けを採用している", \t -> do
+	text t "* 関数は定義された集合内の値にのみ適用できる", \t -> do
+	text t "* たとえば関数notはBool値に適用されBool値を返す", \t -> do
+	text t "* Bool値はTrueとFalseの2つの値しか存在しない", \t -> do
+	itext t 1 "- 完全に正しい関数であることを保証するには", \t -> do
+	arrowIText t 2 "2つの場合のみ考えれば良い", \t -> do
+	text t "* 完全に正しいライブラリを用意することができる"
+	]
+
+features2 :: Page
+features2 = [ \t -> do
+	writeTopTitle t "Haskellの特徴"
+	text t "", \t -> do
+	writeNextTitle t "特徴1: 参照透過性", \t -> do
+	writeNextTitle t "特徴2: 静的型付け"
+	]
+
+functionArray :: Page
+functionArray = [ \t -> do
+	writeTopTitle t "関数の配列"
+	text t "", \t -> do
+	text t "* 引数として数値を取り数値を返す関数の配列を作り", \t -> do
+	itext t 1 "- すべての関数を値5に適用した配列を作りたい", \t -> do
+	text t ""
+	]
+
+lazyEveluation :: Page
+lazyEveluation = [ \t -> do
+	writeTopTitle t "遅延評価"
+	text t "", \t -> do
+	text t "* 参照透過性に関連する特徴の説明", \t -> do
 	text t "* 参照透過性があるからこそこの特徴が生きる"
 	]
 
@@ -489,6 +608,15 @@ lazyExam :: Page
 lazyExam = [ \t -> do
 	writeTopTitle t "遅延評価"
 	text t "", \t -> do
-	text t "* 美しさは実用性につながる", \t -> do
-	text t "(ここに遅延評価の良さげな例を載せる)"
+	text t "* もしも遅延評価ならば以下のような関数が書ける", \t -> do
+	text t "def pickOdd(a, b)"
+	itext t 1 "if a.even? then b else a end"
+	text t "end"
+	text t "def div2(n)"
+	itext t 1 "pickOdd(n, div2(n))"
+	text t "end", \t -> do
+	text t "* pickOddはaが偶数ならばbを選びそうでなければaを返す", \t -> do
+	text t "* div2は関数pickOddを使った奇数になるまで2で割る関数", \t -> do
+	text t "* pickOddは2の倍数かどうかで処理を分ける構文と考えられる", \t -> do
+	text t "* 遅延評価によって単なる関数としてこのような処理が書ける"
 	]
