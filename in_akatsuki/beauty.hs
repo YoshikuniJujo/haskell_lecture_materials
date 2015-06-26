@@ -27,7 +27,11 @@ main = runLecture [
 	features3,
 
 	myIf, myIf2, myIf3, myIf4, myIf5, myIf6, myIf7,
-	lazy, lazyExam
+	lazy, lazyExam,
+	features4,
+
+	twoThree, twoThree2, twoThree3, twoThree4,
+	features5
  ]
 
 myself :: Page
@@ -665,7 +669,7 @@ lazyExam :: Page
 lazyExam = [ \t -> do
 	writeTopTitle t "遅延評価"
 	text t "", \t -> do
-	text t "* もしも遅延評価ならば以下のような関数が書ける", \t -> do
+	text t "* 遅延評価であれば以下のような関数が書ける", \t -> do
 	text t "def pickOdd(a, b)"
 	itext t 1 "if a.even? then b else a end"
 	text t "end"
@@ -675,5 +679,98 @@ lazyExam = [ \t -> do
 	text t "* pickOddはaが偶数ならばbを選びそうでなければaを返す", \t -> do
 	text t "* pDivdiv2は奇数になるまで2で割る関数", \t -> do
 	text t "* pickOddは偶数かどうかで処理を分ける構文と考えられる", \t -> do
-	text t "* 遅延評価だと単なる関数としてこのような処理が書ける"
+	text t "* 単なる関数としてこのような処理が書ける"
+	]
+
+features4 :: Page
+features4 = [ \t -> do
+	writeTopTitle t "Haskellの特徴"
+	text t "", \t -> do
+	writeNextTitle t "特徴1: 参照透過性", \t -> do
+	writeNextTitle t "特徴2: 静的型付け", \t -> do
+	writeNextTitle t "特徴3: 第一級関数", \t -> do
+	writeNextTitle t "特徴4: 遅延評価"
+	]
+
+twoThree :: Page
+twoThree = [ \t -> do
+	writeTopTitle t "配列を作る"
+	text t "", \t -> do
+	text t "* 2でも3でも割り切れない1以上の整数を100集めた配列", \t -> do
+	text t "i = 0; n = 0; nums = []"
+	text t "while (i < 100)"
+	itext t 1 "n += 1"
+	itext t 1 "if (n % 2 != 0 && n % 3 != 0)"
+	itext t 2 "then nums.push n; i += 1 end"
+	text t "end"
+	text t "puts nums", \t -> do
+	text t "* とくに問題はない", \t -> do
+	text t "* しかし「美しくない点」がある"
+	]
+
+twoThree2 :: Page
+twoThree2 = [ \t -> do
+	writeTopTitle t "配列を作る"
+	text t "", \t -> do
+	text t "* 何が美しくないか?", \t -> do
+	text t "* 直交する2つの操作が切り分けられていない", \t -> do
+	text t "* 「2でも3でも割り切れない1以上の整数を選び出す」", \t -> do
+	text t "* 「はじめの100個を取る」", \t -> do
+	text t "* これらの2つの操作は互いに独立であるべきだ", \t -> do
+	text t "* より一般的に言うと", \t -> do
+	itext t 1 "- ある処理に本質的な操作と", \t -> do
+	itext t 1 "- 終了条件とは切り分けるべきだ"
+	]
+
+twoThree3 :: Page
+twoThree3 = [ \t -> do
+	writeTopTitle t "無限リスト"
+	text t "", \t -> do
+	text t "* 2でも3でも割り切れない1以上の整数すべてのリストを作成", \t -> do
+	text t "* そこから100取る", \t -> do
+	text t "* 2つの直交する操作が切り分けられた", \t -> do
+	arrowIText t 1 "美しい", \t -> do
+	text t "* しかし上述のリストを評価すると無限に展開することに"
+	]
+
+twoThree4 :: Page
+twoThree4 = [ \t -> do
+	writeTopTitle t "遅延リスト"
+	text t "", \t -> do
+	text t "* Haskellでリストを定義するとそれは遅延リストとなる", \t -> do
+	text t "* 必要となるまではリストの要素は評価されない", \t -> do
+	text t "* 1以上の整数すべてのリストを作成することができる", \t -> do
+	text t "* そのリストは単に「整数のリスト」として存在する", \t -> do
+	text t "* 2番目の要素が必要になると0, 1, 2番目まで展開される", \t -> do
+	arrowIText t 1 "無限リストを作成し先頭100を取る等が可能に", \t -> do
+	text t "* Haskellではリスト以外でも遅延データ構造となる", \t -> do
+	text t "* 無限樹等も可能となる", \t -> do
+	text t "* 遅延データ構造はHaskellでは", \t -> do
+	itext t 1 "「弱頭部正規形」までの評価として実現されている"
+	]
+
+twoThree4' :: Page
+twoThree4' = [ \t -> do
+	writeTopTitle t "遅延リスト"
+	text t "", \t -> do
+	text t "* Haskellでリストを定義するとそれは遅延リストとなる", \t -> do
+	text t "* 必要となるまではリストの要素は評価されない", \t -> do
+	text t "* 1以上の整数すべてのリストを作成することができる", \t -> do
+	text t "* そのリストをnsとするとnsは以下のように定義される", \t -> do
+	itext t 1 "「先頭は1で残りはnsのすべての要素に1を足したもの」", \t -> do
+	text t "* このリストの2番目まで必要だとする", \t -> do
+	itext t 1 "- 0番目の要素はnsの先頭なので1である", \t -> do
+	itext t 1 "- 1番目の要素は"
+	itext t 2 "nsのすべての要素に1を足したものの0番目"
+	]
+
+features5 :: Page
+features5 = [ \t -> do
+	writeTopTitle t "Haskellの特徴"
+	text t "", \t -> do
+	writeNextTitle t "特徴1: 参照透過性", \t -> do
+	writeNextTitle t "特徴2: 静的型付け", \t -> do
+	writeNextTitle t "特徴3: 第一級関数", \t -> do
+	writeNextTitle t "特徴4: 遅延評価", \t -> do
+	writeNextTitle t "特徴5: 遅延データ構造"
 	]
